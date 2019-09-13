@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from "formik";
 import * as yup from 'yup';
 import axios from 'axios';
 
 
-const FormComp = () => {
+const FormComp = ({ errors, touched, status }) => {
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        if (status) {
+            setUser([...user, status])
+        }
+    }, [status]);
+
     return (
         <Form>
             <div className="name-field">
@@ -45,7 +53,7 @@ export default withFormik({
             terms: values.terms || false
         }
     },
-    validationSchema: yup.objec().shape({
+    validationSchema: yup.object().shape({
         name: yup.string().required('Name is required!'),
         email: yup.string().email().required('Email is required!'),
         password: yup.string().required('Password is required!'),
