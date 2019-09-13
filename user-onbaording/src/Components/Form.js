@@ -17,22 +17,26 @@ const FormComp = ({ errors, touched, status }) => {
         <Form>
             <div className="name-field">
                 <label>
+                    {touched.name && errors.name && <p className="error">{errors.name}</p>}
                     <Field type="text" name="name" placeholder="John Smith" />
                     Name
                 </label>
             </div>
             <div className="email-field">
                 <label>
+                    {touched.email && errors.email && <p className="error">{errors.email}</p>}
                     <Field type="email" name="email" placeholder="123abc@email.com" />
                     Email
                 </label>
             </div>
             <div className="password-terms">
                 <label>
+                    {touched.password && errors.password && <p className="error">{errors.password}</p>}
                     <Field type="password" name="password" />
                     Password
                 </label>
                 <label>
+                    {touched.terms && errors.terms && <p className="error">{errors.terms}</p>}
                     <Field type="checkbox" name="terms"/>
                     <span>Terms of Service</span>
                 </label>
@@ -40,6 +44,9 @@ const FormComp = ({ errors, touched, status }) => {
             <div className="button">
                 <button type="submit">Submit</button>
             </div>
+            {user.map((user) => (
+                <div>User: {user.name}</div>
+            )}
         </Form>
     );
 };
