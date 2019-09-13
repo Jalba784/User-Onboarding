@@ -13,8 +13,10 @@ const FormComp = ({ errors, touched, status }) => {
         }
     }, [status]);
 
+
     return (
         <Form>
+            <h1 className="title">Add New Users</h1>
             <div className="column-field">
                 {touched.name && errors.name && <p className="error">{errors.name}</p>}
                 <Field type="text" name="name" placeholder="John Smith" className="field-len" />
@@ -22,30 +24,30 @@ const FormComp = ({ errors, touched, status }) => {
                     Name
                 </label>
             </div>
-            <div className="column-field">
+            <div className="column-field" id="email-field">
                 {touched.email && errors.email && <p className="error">{errors.email}</p>}
                 <Field type="email" name="email" placeholder="123abc@email.com" className="field-len" />
                 <label className="field-len">
                     Email
                 </label>
             </div>
-            <div className="#">
-                <label>
-                    {touched.password && errors.password && <p className="error">{errors.password}</p>}
+            <div className="here">
+                <label className="pass-col">
+                    {touched.password && errors.password && <p id="two-errors" className="error">{errors.password}</p>}
                     <Field type="password" name="password" />
                     Password
                 </label>
                 <label>
-                    {touched.terms && errors.terms && <p className="error">{errors.terms}</p>}
+                    {touched.terms && errors.terms && <p id="two-errors" className="error">{errors.terms}</p>}
                     <Field type="checkbox" name="terms"/>
                     <span>Terms of Service</span>
                 </label>
             </div>
             <div className="button">
-                <button type="submit">Submit</button>
+                <button type="submit" className="sub-button">Submit</button>
             </div>
-            {user.map((user) => (
-                <div>User: {user.name}</div>
+            {user.map((user, index) => (
+                <div className="new-user" key={index}>User# {index + 1}:  {user.name}</div>
             ))}
         </Form>
     );
