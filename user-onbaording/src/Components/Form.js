@@ -1,12 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
 import { withFormik, Form, Field } from "formik";
-import * as Yup from 'yup';
-// import axios from 'axios';
+import * as yup from 'yup';
+import axios from 'axios';
 
-const Title = styled.h1`
-    text-align: center;
-`;
 
 const FormComp = () => {
     return (
@@ -43,7 +39,25 @@ const FormComp = () => {
 export default withFormik({
     mapPropsToValues: (values) => {
         return {
-            sf
+            name: values.name || '',
+            email: values.email || '',
+            password: values.password || '',
+            terms: values.terms || false
         }
+    },
+    validationSchema: yup.objec().shape({
+        name: yup.string().required('Name is required!'),
+        email: yup.string().email().required('Email is required!'),
+        password: yup.string().required('Password is required!'),
+        terms: yup.boolean().oneOf([true], 'Terms must be agreed')
+    }),
+    handleSubmit: (values, { setStatus }) => {
+        axios.post('https://reqres.in/api/users', values)
+            .then((res) => {
+                setStatus(res.data)
+            })
+            .catch((err) => {
+                console.log('Error:', err)
+            })
     }
-});
+})(FormComp)
