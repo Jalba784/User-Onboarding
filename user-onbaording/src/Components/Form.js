@@ -15,21 +15,21 @@ const FormComp = ({ errors, touched, status }) => {
 
     return (
         <Form>
-            <div className="name-field">
-                <label>
-                    {touched.name && errors.name && <p className="error">{errors.name}</p>}
-                    <Field type="text" name="name" placeholder="John Smith" />
+            <div className="column-field">
+                {touched.name && errors.name && <p className="error">{errors.name}</p>}
+                <Field type="text" name="name" placeholder="John Smith" className="field-len" />
+                <label className="field-len">
                     Name
                 </label>
             </div>
-            <div className="email-field">
-                <label>
-                    {touched.email && errors.email && <p className="error">{errors.email}</p>}
-                    <Field type="email" name="email" placeholder="123abc@email.com" />
+            <div className="column-field">
+                {touched.email && errors.email && <p className="error">{errors.email}</p>}
+                <Field type="email" name="email" placeholder="123abc@email.com" className="field-len" />
+                <label className="field-len">
                     Email
                 </label>
             </div>
-            <div className="password-terms">
+            <div className="#">
                 <label>
                     {touched.password && errors.password && <p className="error">{errors.password}</p>}
                     <Field type="password" name="password" />
@@ -46,7 +46,7 @@ const FormComp = ({ errors, touched, status }) => {
             </div>
             {user.map((user) => (
                 <div>User: {user.name}</div>
-            )}
+            ))}
         </Form>
     );
 };
